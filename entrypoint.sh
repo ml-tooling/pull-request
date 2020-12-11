@@ -20,7 +20,11 @@ fi
 DESTINATION_BRANCH="${INPUT_DESTINATION_BRANCH:-"master"}"
 
 # Github actions no longer auto set the username and GITHUB_TOKEN
-git remote set-url origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+# git remote set-url origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+# TODO set token globally to not change the local config. For act execution
+git config --global url."https://api:$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
+git config --global url."https://ssh:$GITHUB_TOKEN@github.com/".insteadOf "ssh://git@github.com/"
+git config --global url."https://git:$GITHUB_TOKEN@github.com/".insteadOf "git@github.com:"
 
 # Pull all branches references down locally so subsequent commands can see them
 git fetch origin '+refs/heads/*:refs/heads/*' --update-head-ok
