@@ -49,6 +49,7 @@ fi
 export GITHUB_USER="$GITHUB_ACTOR"
 
 # https://github.com/github/hub/issues/1067#issuecomment-728886966
+mkdir -p ~/.config
 printf 'github.com:\n- user: api\n  oauth_token:  $GITHUB_TOKEN' > ~/.config/hub
 
 PR_ARG="$INPUT_PR_TITLE"
